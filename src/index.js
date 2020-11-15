@@ -26,7 +26,7 @@ app.get('/api/student/:id', (req, res) => {
 
 app.post('/api/student', (req, res) => {
     const name = req.body.name.trim();
-    const currentClass = req.body.currentClass.trim();
+    const currentClass = req.body.currentClass;
     const division = req.body.division.trim();
     //console.log(req.body);
     if(name === undefined || currentClass === undefined || division === undefined){
