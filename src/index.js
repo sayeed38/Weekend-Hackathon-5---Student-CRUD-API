@@ -44,11 +44,13 @@ app.post('/api/student', (req, res) => {
         division: division
     }
     arr.push(obj);
-    res.send(`${id}`);
+    res.send(
+        {"id":id
+    });
 });
 
-app.put('/api/student', (req, res) => {
-    const id = +req.body.id;
+app.put('/api/student/:id', (req, res) => {
+    const id = +req.params.id;
     const name = req.body.name.trim();
     
     if(Number.isNaN(id) || name === undefined){
