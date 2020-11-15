@@ -52,7 +52,7 @@ app.post('/api/student', (req, res) => {
 app.put('/api/student/:id', (req, res) => {
     const id = +req.params.id;
     const name = req.body.name.trim();
-    console.log(id, name);
+    //console.log(id, name);
     if(Number.isNaN(id) || name === undefined || name === ""){
         res.status(400).send("Bad Request");
         return;
@@ -64,13 +64,13 @@ app.put('/api/student/:id', (req, res) => {
         }
         return null;
     });
-
-    if(!obj){
+    //console.log(obj);
+    if(obj.length === 0){
         res.status(400).send("Bad Request");
         return;
     }
     
-    console.log(arr);
+    //console.log(arr);
     res.send(obj[0]);
 
 });
