@@ -18,7 +18,7 @@ app.get('/api/student/:id', (req, res) => {
     //console.log(req.params.id);
     const filteredStudent = arr.filter(student => student.id === +req.params.id);
     if(filteredStudent.length === 0){
-        res.send("404");
+        res.status(404).send(req.params.id);
         return;
     }
     res.send(filteredStudent[0]);
@@ -30,10 +30,10 @@ app.post('/api/student', (req, res) => {
     const division = req.body.division.trim();
     //console.log(req.body);
     if(name === undefined || currentClass === undefined || division === undefined){
-        res.send("404");
+        res.status(404).send("Not Found");
         return;
     }else if(name === "" || currentClass === "" || division === ""){
-        res.send("404");
+        res.status(404).send("Not Found");
         return;
     }
     const id = arr[arr.length-1].id+1;
@@ -52,12 +52,12 @@ app.put('/api/student', (req, res) => {
     const name = req.body.name.trim();
     
     if(Number.isNaN(id) || name === undefined){
-        res.send("404");
+        res.status(404).send("Not Found");
         return;
     }
     const isIdExist = arr.find(student => student.id === id);
     if(!isIdExist || name === ""){
-        res.send("404");
+        res.status(404).send("Not Found");
         return;
     }
     arr = arr.map(student => {
@@ -76,11 +76,11 @@ app.delete('/api/student/:id', (req,res) => {
     const isIdExist = arr.find(student => student.id === id);
     //console.log(isIdExist);
     if(!isIdExist){
-        res.send("404");
+        res.status(404).send(`${id}`);
         return;
     }
     arr = arr.filter(student => student.id !== id);
-    res.send("Done");
+    res.status(200).send(`${id}`);
 })
 
 app.listen(port, () => console.log(`App listening on port ${port}!`))
