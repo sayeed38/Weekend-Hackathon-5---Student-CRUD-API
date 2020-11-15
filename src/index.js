@@ -52,12 +52,12 @@ app.put('/api/student', (req, res) => {
     const name = req.body.name.trim();
     
     if(Number.isNaN(id) || name === undefined){
-        res.status(404).send("Not Found");
+        res.status(400).send("Bad Request");
         return;
     }
     const isIdExist = arr.find(student => student.id === id);
     if(!isIdExist || name === ""){
-        res.status(404).send("Not Found");
+        res.status(400).send("Bad Request");
         return;
     }
     arr = arr.map(student => {
