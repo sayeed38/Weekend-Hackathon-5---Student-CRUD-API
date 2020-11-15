@@ -25,23 +25,23 @@ app.get('/api/student/:id', (req, res) => {
 });
 
 app.post('/api/student', (req, res) => {
-    const name = req.body.name.trim();
-    const currentClass = req.body.currentClass;
-    const division = req.body.division.trim();
+    const name = req.body.name;
+    const currentClass = +req.body.currentClass;
+    const division = req.body.division;
     //console.log(req.body);
-    if(name === undefined || currentClass === undefined || division === undefined){
+    if(name === undefined || Number.isNaN(currentClass) || division === undefined){
         res.status(404).send("Not Found");
         return;
-    }else if(name === "" || currentClass === "" || division === ""){
+    }else if(name.trim() === "" || division.trim() === ""){
         res.status(404).send("Not Found");
         return;
     }
     const id = arr[arr.length-1].id+1;
     const obj = {
         id: id,
-        name : name,
+        name : name.trim(),
         currentClass: currentClass,
-        division: division
+        division: division.trim()
     }
     arr.push(obj);
     res.send(
