@@ -64,14 +64,14 @@ app.put('/api/student/:id', (req, res) => {
         }
         return null;
     });
-    //console.log(obj);
+    console.log(obj);
     if(obj.length === 0){
         res.status(400).send("Bad Request");
         return;
     }
     
     //console.log(arr);
-    res.send(obj[0]);
+    res.send({"name": name});
 
 });
 
