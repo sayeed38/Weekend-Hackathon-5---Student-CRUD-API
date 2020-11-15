@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // your code goes here
+let studentId = arr[arr.length-1].id;
 app.get('/api/student', (req, res) => {
     res.send(arr);
 });
@@ -36,16 +37,17 @@ app.post('/api/student', (req, res) => {
         res.status(404).send("Not Found");
         return;
     }
-    const id = arr[arr.length-1].id+1;
+    //const id = arr[arr.length-1].id+1;
+    //console.log(studentId);
     const obj = {
-        id: id,
+        id: ++studentId,
         name : name,
         currentClass: currentClass,
         division: division
     }
     arr.push(obj);
     res.send(
-        {"id":id
+        {"id":studentId
     });
 });
 
