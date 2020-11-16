@@ -50,25 +50,14 @@ app.post('/api/student', (req, res) => {
 });
 
 app.put('/api/student/:id', (req, res) => {
-    const id = +req.params.id;
-    const name = req.body.name.trim();
-    //console.log(id, name);
-    if(Number.isNaN(id) || name === undefined || name === ""){
-        res.sendStatus(400);
+    const id = req.params.id;
+    const student = data.find(student => student.id === parseInt(id));
+    const newName = req.body.name;
+    if((!student) || (!newName)) { 
+        res.status(400);
         return;
     }
-    const obj = arr.filter(student => {
-        if(student.id === id){
-            student.name = name;
-            return student;
-        }
-        return null;
-    });
-    console.log(obj);
-    if(obj.length === 0){
-        res.sendStatus(400);
-        return;
-    }
+    student.name = newName;
     
     //console.log(arr);
     //res.send({"name": name});
