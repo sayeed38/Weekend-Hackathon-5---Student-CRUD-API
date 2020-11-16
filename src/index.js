@@ -18,7 +18,7 @@ app.get('/api/student/:id', (req, res) => {
     //console.log(req.params.id);
     const filteredStudent = arr.filter(student => student.id === +req.params.id);
     if(filteredStudent.length === 0){
-        res.status(404).send(req.params.id);
+        res.sendStatus(404);
         return;
     }
     res.send(filteredStudent[0]);
@@ -30,10 +30,10 @@ app.post('/api/student', (req, res) => {
     const division = req.body.division;
     //console.log(req.body);
     if(name === undefined || Number.isNaN(currentClass) || division === undefined){
-        res.status(404).send("Not Found");
+        res.sendStatus(404);
         return;
     }else if(name.trim() === "" || division.trim() === ""){
-        res.status(404).send("Not Found");
+        res.sendStatus(404);
         return;
     }
     const id = arr[arr.length-1].id+1;
@@ -54,7 +54,7 @@ app.put('/api/student/:id', (req, res) => {
     const name = req.body.name.trim();
     //console.log(id, name);
     if(Number.isNaN(id) || name === undefined || name === ""){
-        res.status(400).send("Bad Request");
+        res.sendStatus(400);
         return;
     }
     const obj = arr.filter(student => {
@@ -66,12 +66,12 @@ app.put('/api/student/:id', (req, res) => {
     });
     console.log(obj);
     if(obj.length === 0){
-        res.status(400).send("Bad Request");
+        res.sendStatus(400);
         return;
     }
     
     //console.log(arr);
-    res.send({"name": name});
+    //res.send({"name": name});
 
 });
 
@@ -80,7 +80,7 @@ app.delete('/api/student/:id', (req,res) => {
     const isIdExist = arr.find(student => student.id === id);
     //console.log(isIdExist);
     if(!isIdExist){
-        res.status(404).send(`${id}`);
+        res.sendStatus(404);
         return;
     }
     arr = arr.filter(student => student.id !== id);
