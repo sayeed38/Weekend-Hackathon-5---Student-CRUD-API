@@ -62,18 +62,6 @@ app.put('/api/student/:id', (req, res) => {
         res.sendStatus(400);
         return;
     }
-    // let found = false;
-    // const keys = ['name','currentClass','division'];
-    // // for(let i=0; i<Object.keys(data); i++){
-    // //     found = keys.includes(Object.keys(data)[i]);
-    // //     if(found == true){
-    // //         brea
-    // //     }
-    // // }
-    // if(!found){
-    //     res.sendStatus(400);
-    //     return;
-    // }
     let count = 0;
     if(data.name === undefined){
         count++;
@@ -98,10 +86,6 @@ app.put('/api/student/:id', (req, res) => {
         res.sendStatus(400);
         return;
     }
-
-    
-    //console.log(arr);
-    //res.send({"name": name});
 
 });
 
