@@ -50,14 +50,55 @@ app.post('/api/student', (req, res) => {
 });
 
 app.put('/api/student/:id', (req, res) => {
-    const id = req.params.id;
-    const student = data.find(student => student.id === parseInt(id));
-    const newName = req.body.name;
-    if((!student) || (!newName)) { 
-        res.status(400);
+    const rId = +req.params.id;
+    const data = req.body;
+    let idx = -1;
+    arr.forEach((student, index) => {
+        if(student.id === rId){
+            idx = index;
+        }
+    });
+    if(idx === -1){
+        res.sendStatus(400);
         return;
     }
-    student.name = newName;
+    // let found = false;
+    // const keys = ['name','currentClass','division'];
+    // // for(let i=0; i<Object.keys(data); i++){
+    // //     found = keys.includes(Object.keys(data)[i]);
+    // //     if(found == true){
+    // //         brea
+    // //     }
+    // // }
+    // if(!found){
+    //     res.sendStatus(400);
+    //     return;
+    // }
+    let count = 0;
+    if(data.name === undefined){
+        count++;
+    }else{
+        arr[idx].name = data.name;
+    }
+    if(data.currentClass === undefined){
+        count++;
+    }else{
+        arr[idx].currentClass = +data.currentClass;
+    }
+    if(data.division === undefined){
+        count++;
+    }else{
+        arr[idx].division = data.division;
+    }
+    if(count!==3){
+        res.send("updated");
+        return;
+    }
+    else{
+        res.sendStatus(400);
+        return;
+    }
+
     
     //console.log(arr);
     //res.send({"name": name});
